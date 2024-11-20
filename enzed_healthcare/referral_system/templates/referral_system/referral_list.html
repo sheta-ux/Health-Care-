@@ -1,0 +1,30 @@
+{% extends "referral_system/base.html" %}
+
+{% block title %}Referrals{% endblock %}
+
+{% block content %}
+<br><h2>Referrals</h2>
+<a class="btn btn-success mb-3" href="{% url 'referral_add' %}">Add Referral</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Person</th>
+            <th>Referral Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for referral in referrals %}
+        <tr>
+            <td>{{ referral.person }}</td>
+            <td>{{ referral.referral_date }}</td>
+            <td>
+                <a href="{% url 'referral_detail' referral.pk %}" class="btn btn-primary btn-sm">View</a>
+                <a href="{% url 'referral_edit' referral.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'referral_delete' referral.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

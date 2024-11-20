@@ -1,0 +1,16 @@
+{% extends "referral_system/base.html" %}
+
+{% block title %}Delete Person{% endblock %}
+
+{% block content %}
+<div class="dcontainer">
+    <h2 class="my-4">Delete Person</h2>
+    <p>Are you sure you want to delete <strong>{{ person.first_name }} {{ person.last_name }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'person_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

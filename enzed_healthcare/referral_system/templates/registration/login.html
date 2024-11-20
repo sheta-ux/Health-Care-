@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Login</h2>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="errors">
+                <p>Your username and password didn't match. Please try again.</p>
+            </div>
+        {% endif %}
+        <div>
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+        </div>
+        <div>
+            <label for="id_password">Password:</label>
+            {{ form.password }}
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <br><p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "referral_system/base.html" %}
+
+{% block title %}Person List{% endblock %}
+
+{% block content %}
+<div class="main mt-4">
+    <br><h2>People</h2>
+    <a href="{% url 'person_add' %}" class="btn btn-success btn-spacing">Add Person</a>
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Date of Birth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in people %}
+            <tr>
+                <td>{{ person.id }}</td>
+                <td>{{ person.first_name }} {{ person.last_name }}</td>
+                <td>{{ person.date_of_birth }}</td>
+                <td>
+                    <a href="{% url 'person_detail' person.id %}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{% url 'person_edit' person.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'person_delete' person.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No people found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Health Management Referral System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'referral_system/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div>
+                <img src="{% static 'referral_system/logo.jpg' %}" alt="Logo">
+                <h1>Enzed Healthcare</h1>
+            </div>
+            <div>
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-light btn-sm">Admin Login</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="nav">
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'person_list' %}">People</a></li>
+                    <li><a href="{% url 'referral_list' %}">Referrals</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="footer">
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; Enzed Healthcare, 2024</p>
+    </footer>
+</body>
+</html>

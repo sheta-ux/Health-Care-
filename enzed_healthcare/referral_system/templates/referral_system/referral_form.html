@@ -1,0 +1,19 @@
+{% extends "referral_system/base.html" %}
+
+{% block title %}Referral Form{% endblock %}
+
+{% block content %}
+<div class="econtainer">
+    <h2 class="my-4">{% if form.instance.pk %}Edit Referral{% else %}Add Referral{% endif %}</h2>
+
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary mt-3">
+            {% if form.instance.pk %}Save Changes{% else %}Add Referral{% endif %}
+        </button>
+        <a href="{% url 'referral_list' %}" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+{% endblock %}
